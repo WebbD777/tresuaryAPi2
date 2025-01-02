@@ -10,8 +10,10 @@ public partial class Category : ContentPage
     List<string> itemLabel = new List<string>();
     string _itemCode;
     int _year;
-    public Category()
+    string _demarCOde;
+    public Category(string code)
 	{
+        _demarCOde = code;
 		InitializeComponent();
 
         GetCategories(url);
@@ -84,15 +86,15 @@ public partial class Category : ContentPage
         string getYear = inputField.Text;
         _year = int.Parse(getYear);
 
-        if (2024 < _year && _year > 2007)
+        if (2024 > _year && _year > 2007)
         {
-            movePage(_year, itemCode[intItemCode]);
+            movePage(_year, itemCode[intItemCode], itemLabel[intItemCode]);
         }
     }
 
-    private async void movePage(int year, string codeStr)
+    private async void movePage(int year, string codeStr, string label)
     {
         //await Navigation.PushAsync(new Page2(muniCode, codes));
-        await Navigation.PushAsync(new outPutPage(year, codeStr));
+        await Navigation.PushAsync(new outPutPage(year, codeStr, label, _demarCOde));
     }
 }

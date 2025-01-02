@@ -34,7 +34,7 @@
         private async void movePage()
         {
             //await Navigation.PushAsync(new Page2(muniCode, codes));
-            await Navigation.PushAsync(new Category());
+            await Navigation.PushAsync(new Category(codes[int.Parse(muniCode)]));
         }
 
         private readonly HttpClient _client = new HttpClient();
