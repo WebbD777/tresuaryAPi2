@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="tresuaryAPi2.Category"
+             Title="Category">
+    <FlexLayout>
+        <VerticalStackLayout>
+            <Label 
+                Text="Enter year"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center" />
+            <Entry x:Name="inputField" Placeholder="" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center" />
+        </VerticalStackLayout>
+        <CollectionView 
+            x:Name="categoryList"
+            SelectionMode="Single"
+            SelectionChanged="OnSelectionChanged2"
+           ></CollectionView>
+        <Button x:Name="submitBTN"
+            Text="Submit" Clicked="OnSubmitButtonClicked" HorizontalOptions="Center" VerticalOptions="Center" />
+    </FlexLayout>
+</ContentPage>
