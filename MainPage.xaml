@@ -3,21 +3,31 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="tresuaryAPi2.MainPage">
 
-    <FlexLayout >
+    <StackLayout >
        
         <Label Text = "Choose municipality: "
                    FontSize ="20"/>
-        
-        <CollectionView 
-            x:Name="MuniList"
-            SelectionMode="Single"
-           SelectionChanged="OnSelectionChanged"></CollectionView>
-        
+
+
         <Button 
             x:Name="MuniBtn"
             Text="Click"
             Clicked="OnMuniClicked"/>
-        
-    </FlexLayout>
+
+        <CollectionView x:Name="MuniList" ItemsSource="{Binding MuniItems}" VerticalOptions="FillAndExpand" SelectionMode="Single" SelectionChanged="OnSelectionChanged">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Padding="10" Margin="0,10,0,10">
+                        <StackLayout>
+                            <Label x:Name="labelGet"
+                                   Text="{Binding LabelText}" Padding="3" />
+                        </StackLayout>
+                    </Frame>
+                </DataTemplate>
+
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </StackLayout>
 
 </ContentPage>

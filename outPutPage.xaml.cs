@@ -76,7 +76,16 @@ public partial class outPutPage : ContentPage
                             sum.Add(sumStr);
                             functionLabel.Add(functionStr);*/
 
-                            model.MuniItems.Add(new MuniItem { LabelText = functionStr, AmountText = "R"+sumStr });
+                            if (sumStr != "")
+                            {
+                                sumStr = "R"+ sumStr;
+                            }
+                            else
+                            {
+                                sumStr = "Amount missing from server";
+                            }
+
+                            model.MuniItems.Add(new MuniItem { LabelText = functionStr, AmountText = sumStr });
                         }
                     }
                 }

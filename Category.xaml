@@ -3,21 +3,32 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="tresuaryAPi2.Category"
              Title="Category">
-    <FlexLayout>
-        <VerticalStackLayout>
-            <Label 
+
+    <StackLayout>
+
+        <Label 
                 Text="Enter year"
                 VerticalOptions="Center" 
                 HorizontalOptions="Center" />
-            <Entry x:Name="inputField" Placeholder="" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center" />
-            <Button x:Name="submitBTN"
-    Text="Submit" Clicked="OnSubmitButtonClicked" HorizontalOptions="Center" VerticalOptions="Center" />
-        </VerticalStackLayout>
-        <CollectionView 
-            x:Name="categoryList"
-            SelectionMode="Single"
-            SelectionChanged="OnSelectionChanged2"
-           ></CollectionView>
-        
-    </FlexLayout>
+
+        <Entry x:Name="inputField" Placeholder="" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center" />
+
+        <Button x:Name="submitBTN" Text="Submit" Clicked="OnSubmitButtonClicked" HorizontalOptions="Center" VerticalOptions="Center" />
+
+
+        <CollectionView x:Name="MuniList" ItemsSource="{Binding FunctionItems}" VerticalOptions="FillAndExpand" SelectionMode="Single" SelectionChanged="OnSelectionChanged2">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Padding="10" Margin="0,10,0,10">
+                        <StackLayout>
+                            <Label x:Name="labelGet"
+                           Text="{Binding FunctionText}" Padding="3" />
+                        </StackLayout>
+                    </Frame>
+                </DataTemplate>
+
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </StackLayout>
 </ContentPage>

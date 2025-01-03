@@ -3,6 +3,16 @@
 namespace tresuaryAPi2;
 
 using Newtonsoft.Json.Linq;
+using System.Collections.ObjectModel;
+
+using Microsoft.Maui.Devices;
+using Newtonsoft.Json.Linq;
+using System.Net.Http;
+using System.Runtime.CompilerServices;
+using System.Text;
+using System.Text.Json;
+using System.Threading.Tasks;
+
 public partial class Category : ContentPage
 {
     string url = "https://municipaldata.treasury.gov.za/api/cubes/incexp/members/item";
@@ -11,14 +21,17 @@ public partial class Category : ContentPage
     string _itemCode;
     int _year;
     string _demarCOde;
+
+    FunctionViewModel model = new FunctionViewModel();
     public Category(string code)
 	{
+
+        InitializeComponent();
+
         _demarCOde = code;
-		InitializeComponent();
 
         GetCategories(url);
     }
-
     public async Task<List<List<string>>> GetCategories(string url)
     {
 
@@ -49,11 +62,15 @@ public partial class Category : ContentPage
 
                             itemCode.Add(itemCodestr);
                             itemLabel.Add(itemLabelstr);
+
+                            model.FunctionItems.Add(new FunctionItem { FunctionText = itemLabelstr });
                         }
                     }
                 }
 
-               categoryList.ItemsSource = itemLabel;
+                BindingContext = model;
+
+            //   categoryList.ItemsSource = itemLabel;
                 /*List<String> arrears = new List<string>();
                 arrears.Add("Hello");
                 arrears.Add("Mate");
@@ -70,9 +87,8 @@ public partial class Category : ContentPage
     // For selecting CoolectionView Item
     private void OnSelectionChanged2(object sender, SelectionChangedEventArgs e)
     {
-        var slectedItem = e.CurrentSelection.FirstOrDefault();
-
-        submitBTN.Text = slectedItem.ToString();
+        var slectedItem = e.CurrentSelection[0] as FunctionItem; ;
+        submitBTN.Text = slectedItem.FunctionText;
     }
 
     // For pressing Button
@@ -96,5 +112,21 @@ public partial class Category : ContentPage
     {
         //await Navigation.PushAsync(new Page2(muniCode, codes));
         await Navigation.PushAsync(new outPutPage(year, codeStr, label, _demarCOde));
+    }
+}
+
+class FunctionItem
+{
+    public string FunctionText { get; set; }
+}
+
+class FunctionViewModel
+{
+    public ObservableCollection<FunctionItem> FunctionItems { get; set; }
+
+    public FunctionViewModel()
+    {
+        // Initialize with some sample data
+        FunctionItems = new ObservableCollection<FunctionItem>();
     }
 }
