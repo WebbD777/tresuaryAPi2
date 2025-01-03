@@ -3,18 +3,23 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="tresuaryAPi2.outPutPage"
              Title="outPutPage">
-    <FlexLayout>
-        <Label 
-            x:Name="outPutLabel"
-            Text=""
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-        <ListView
-            x:Name="lsView"
-            VerticalOptions="Center"
-            HorizontalOptions="Start"
-            Margin="20">
-            
-        </ListView>
-    </FlexLayout>
+    <StackLayout Margin="10">
+        <Label
+            x:Name="outPutLabel"/>
+
+        <CollectionView x:Name="MuniList" ItemsSource="{Binding MuniItems}" VerticalOptions="FillAndExpand">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Padding="10" Margin="0,10,0,10">
+                        <StackLayout>
+                            <Label Text="{Binding LabelText}" Padding="3" />
+                            <Label Text="{Binding AmountText}" Padding="10" />
+                        </StackLayout>
+                    </Frame>
+                </DataTemplate>
+               
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+       
+    </StackLayout>
 </ContentPage>
